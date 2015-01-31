@@ -80,4 +80,17 @@ public class OrderQueueTest {
         assertTrue(didThrow);
     }
     
+    @Test
+    public void testNewOrderWhenNoPurchases(){
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        try{
+            orderQueue.add(order);
+        } catch (Exception ex){
+            didThrow = true;
+        }        
+        assertTrue(didThrow);
+    }
+    
 }
