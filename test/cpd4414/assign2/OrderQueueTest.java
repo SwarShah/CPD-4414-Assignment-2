@@ -118,7 +118,9 @@ public class OrderQueueTest {
         Order order = new Order("CUST00001", "ABC Construction");
         order.addPurchase(new Purchase("PROD0004", 450));
         order.addPurchase(new Purchase("PROD0006", 250));
-        order.setTimeReceived(null);
-        
+        order.setTimeReceived(new Date(new Date().getTime()-1422722222));
+        orderQueue.process(order);
+        long expResult = new Date().getTime();
+        assertEquals(expResult, order.getTimeProcessed().getTime());
     }
 }
