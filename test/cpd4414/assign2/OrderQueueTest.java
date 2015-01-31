@@ -156,4 +156,21 @@ public class OrderQueueTest {
         }
         assertTrue(didThrow);
     }
+    
+    @Test
+    public void testFulfillOrderWhenOrderDoesNotHaveTimeReceivedThenThrowException(){
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        order.setTimeProcessed(new Date(new Date().getTime()-1422724484));
+        try{
+            orderQueue.fulfill(order);
+        }
+        catch(RuntimeException ex){
+            didThrow = true;
+        }
+        assertTrue(didThrow);
+    }
 }

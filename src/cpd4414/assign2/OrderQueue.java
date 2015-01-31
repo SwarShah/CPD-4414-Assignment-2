@@ -59,6 +59,9 @@ public class OrderQueue {
         if(order.getTimeProcessed()==null){
             throw new RuntimeException("EXCEPTION: Order Does Not Have Time Processed");
         }
+        if(order.getTimeReceived()==null){
+            throw new RuntimeException("EXCEPTION: Order Does Not Have Time Received");
+        }
     }
     
     private class NoCustomerException extends RuntimeException{}
