@@ -111,4 +111,14 @@ public class OrderQueueTest {
         Order result = orderQueue.requestNextOrder();
         assertEquals(result, null);
     }
+    
+    @Test
+    public void testSetTimeProcessedToNowWhenHasTimeReceived(){
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        order.setTimeReceived(null);
+        
+    }
 }

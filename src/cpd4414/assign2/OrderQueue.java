@@ -45,6 +45,13 @@ public class OrderQueue {
         return orderQueue.peek();
     }
     
+    public void process(Order order){
+        if(order.getTimeReceived()!=null){
+            order.setTimeProcessed(new Date());
+        }
+        
+    }
+    
     private class NoCustomerException extends RuntimeException{}
     private class NoPurchasesException extends RuntimeException{}
 }
