@@ -28,7 +28,12 @@ public class OrderQueue {
     Queue<Order> orderQueue = new ArrayDeque<>();
     
     public void add(Order order) {
+        if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()){
+            throw new NoCustomerException();
+        }
         orderQueue.add(order);
         order.setTimeReceived(new Date());
     }
+    
+    private class NoCustomerException extends RuntimeException{}
 }
