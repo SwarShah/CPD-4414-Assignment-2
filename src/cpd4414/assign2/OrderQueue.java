@@ -64,6 +64,17 @@ public class OrderQueue {
         }
     }
     
+    public String report(){
+        
+        if(orderQueue.isEmpty()){
+            return "";
+        }
+        else{
+            return "JSON OBJECT";
+        }
+        
+    }
+    
     private class NoCustomerException extends RuntimeException{}
     private class NoPurchasesException extends RuntimeException{}
 }

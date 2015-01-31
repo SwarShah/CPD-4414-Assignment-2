@@ -173,4 +173,12 @@ public class OrderQueueTest {
         }
         assertTrue(didThrow);
     }
+    
+    @Test
+    public void testRequestForReportWhenThereAreNoOrdersInSystemThenReturnEmptyString(){
+        OrderQueue orderQueue = new OrderQueue();
+        String result = orderQueue.report();
+        String expResult = "";
+        assertEquals(expResult, result);
+    }
 }
