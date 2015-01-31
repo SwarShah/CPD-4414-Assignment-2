@@ -123,4 +123,20 @@ public class OrderQueueTest {
         long expResult = new Date().getTime();
         assertEquals(expResult, order.getTimeProcessed().getTime());
     }
+    
+    @Test
+    public void testProcessOrderWhenOrderNotHaveTimeReceivedThenThrowException(){
+        boolean didThrow = false;
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        try{
+            orderQueue.process(order);
+        }
+        catch(RuntimeException ex){
+            didThrow = true;
+        }
+        assertTrue(didThrow);
+    }
 }

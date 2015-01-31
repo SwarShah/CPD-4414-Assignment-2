@@ -49,6 +49,9 @@ public class OrderQueue {
         if(order.getTimeReceived()!=null){
             order.setTimeProcessed(new Date());
         }
+        else{
+            throw new RuntimeException("EXCEPTION: Order does not have time received");
+        }
         
     }
     
