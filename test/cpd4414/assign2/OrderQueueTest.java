@@ -104,4 +104,11 @@ public class OrderQueueTest {
         Order expResult = orderQueue.orderQueue.peek();
         assertEquals(result, expResult);
     }
+    
+    @Test
+    public void testReturnNullWhenThereAreNoOrders(){
+        OrderQueue orderQueue = new OrderQueue();
+        Order result = orderQueue.requestNextOrder();
+        assertEquals(result, null);
+    }
 }

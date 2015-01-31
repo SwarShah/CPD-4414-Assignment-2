@@ -39,6 +39,9 @@ public class OrderQueue {
     }
     
     public Order requestNextOrder(){
+        if(orderQueue.isEmpty()){
+            return null;
+        }
         return orderQueue.peek();
     }
     
