@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Len Payne <len.payne@lambtoncollege.ca>.
+ * * Copyright 2015 Swar Shah <swar12894@gmail.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import java.sql.*;
 /**
  * This class is a wrapper around the Inventory table.
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author  Swar Shah <swar12894@gmail.com>
  */
 public class Inventory {
 
