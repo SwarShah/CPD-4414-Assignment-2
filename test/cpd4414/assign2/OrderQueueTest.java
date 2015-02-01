@@ -141,6 +141,19 @@ public class OrderQueueTest {
     }
     
     @Test
+    public void testRequestFulfillOrderWhenOrderHasTimeProcessedAndTimeReceivedAndAllPurchasesAreInStockThenTimeFulfilledToNow(){
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase(1, 5));
+        order.addPurchase(new Purchase(2, 8));
+        order.setTimeReceived(new Date());
+        order.setTimeProcessed(new Date());
+        orderQueue.fulfill(order);
+        long expResult = new Date().getTime();
+        assertEquals(expResult, order.getTimeFulfilled().getTime());
+    }
+    
+    @Test
     public void testFulfillOrderWhenOrderDoesNotHaveTimeProcessedThenThrowException(){
         boolean didThrow = false;
         OrderQueue orderQueue = new OrderQueue();
@@ -178,7 +191,6 @@ public class OrderQueueTest {
     public void testRequestForReportWhenThereAreNoOrdersInSystemThenReturnEmptyString(){
         OrderQueue orderQueue = new OrderQueue();
         String result = orderQueue.report();
-        String expResult = "";
-        assertEquals(expResult, result);
+        assertEquals("", result);
     }
 }

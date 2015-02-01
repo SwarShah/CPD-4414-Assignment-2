@@ -74,8 +74,23 @@ public class OrderQueue {
         if(order.getTimeProcessed()==null){
             throw new RuntimeException("EXCEPTION: Order Does Not Have Time Processed");
         }
-        if(order.getTimeReceived()==null){
+        else if(order.getTimeReceived()==null){
             throw new RuntimeException("EXCEPTION: Order Does Not Have Time Received");
+        }
+        else{
+            boolean inStock = true;
+            int count = order.getListOfPurchases().size();
+            for (int i = 0; i < count; i++) {
+                int pId = order.getListOfPurchases().get(i).getProductId();
+                int qtyDB = Inventory.getQuantityForId(pId);
+                int qtyReq = order.getListOfPurchases().get(i).getQuantity();
+                if(qtyReq >= qtyDB){
+                    inStock = false;
+                }
+            }
+            if(inStock){
+                order.setTimeFulfilled(new Date());
+            }            
         }
     }
     
