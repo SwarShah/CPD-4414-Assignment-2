@@ -56,8 +56,8 @@ public class OrderQueueTest {
     public void testWhenCustomerExistsAndPurchasesExistThenTimeReceivedIsNow() {
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(4, 450));
+        order.addPurchase(new Purchase(6, 250));
         orderQueue.add(order);
         
         long expResult = new Date().getTime();
@@ -70,8 +70,8 @@ public class OrderQueueTest {
         boolean didThrow = false;
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("","");
-        order.addPurchase(new Purchase("PROD0001", 100));
-        order.addPurchase(new Purchase("PROD0002", 150));
+        order.addPurchase(new Purchase(1, 100));
+        order.addPurchase(new Purchase(2, 150));
         try{
             orderQueue.add(order);
         } catch (Exception ex){
@@ -97,8 +97,8 @@ public class OrderQueueTest {
     public void testReturnOrderWithEarliestTimeReceivedThatNotHaveTimeProcessed(){
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(4, 450));
+        order.addPurchase(new Purchase(6, 250));
         orderQueue.add(order);
         Order result = orderQueue.requestNextOrder();
         Order expResult = orderQueue.orderQueue.peek();
@@ -116,8 +116,8 @@ public class OrderQueueTest {
     public void testSetTimeProcessedToNowWhenHasTimeReceived(){
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(1, 5));
+        order.addPurchase(new Purchase(2, 8));
         order.setTimeReceived(new Date(new Date().getTime()-1422722222));
         orderQueue.process(order);
         long expResult = new Date().getTime();
@@ -129,8 +129,8 @@ public class OrderQueueTest {
         boolean didThrow = false;
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(4, 450));
+        order.addPurchase(new Purchase(6, 250));
         try{
             orderQueue.process(order);
         }
@@ -145,8 +145,8 @@ public class OrderQueueTest {
         boolean didThrow = false;
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(4, 450));
+        order.addPurchase(new Purchase(6, 250));
         order.setTimeReceived(new Date(new Date().getTime()-1422722222));
         try{
             orderQueue.fulfill(order);
@@ -162,8 +162,8 @@ public class OrderQueueTest {
         boolean didThrow = false;
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
+        order.addPurchase(new Purchase(4, 450));
+        order.addPurchase(new Purchase(6, 250));
         order.setTimeProcessed(new Date(new Date().getTime()-1422724484));
         try{
             orderQueue.fulfill(order);

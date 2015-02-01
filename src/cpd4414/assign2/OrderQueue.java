@@ -17,7 +17,9 @@
 package cpd4414.assign2;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -46,8 +48,21 @@ public class OrderQueue {
     }
     
     public void process(Order order){
+            
         if(order.getTimeReceived()!=null){
-            order.setTimeProcessed(new Date());
+            boolean inStock = true;
+            int count = order.getListOfPurchases().size();
+            for (int i = 0; i < count; i++) {
+                int pId = order.getListOfPurchases().get(i).getProductId();
+                int qtyDB = Inventory.getQuantityForId(pId);
+                int qtyReq = order.getListOfPurchases().get(i).getQuantity();
+                if(qtyReq >= qtyDB){
+                    inStock = false;
+                }
+            }
+            if(inStock){
+                order.setTimeProcessed(new Date());
+            }            
         }
         else{
             throw new RuntimeException("EXCEPTION: Order does not have time received");
